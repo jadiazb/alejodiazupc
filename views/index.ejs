@@ -1,11 +1,29 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Bienvenidos a mi Blog</h1>
-    <p>Autor: <%= autor %></p>
-  </body>
-</html>
+<% include ./templates/header %>
+
+  <div class="row">
+    <% for(var i=0; i<info.length; i++){ %>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="https://placeimg.com/125/125/any" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= info[i].nombreSemillero %>
+            </h5>
+            <p class="card-text">
+              <%= info[i].descripcionSemillero %>
+            </p>
+            <p class="card-text">
+              <%= info[i].liderSemillero %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% } %>
+  </div>
+
+
+
+
+
+  <% include ./templates/footer %>
+    <% include ./templates/scripts %>

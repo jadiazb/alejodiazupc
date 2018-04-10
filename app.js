@@ -8,8 +8,8 @@ var bodyParser = require('body-parser');
 //Modelos de la Base de Datos
 var models = require("./models/index");
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+var index = require('./routes/vistas');
+
 //Vinculo las rutas
 var semilleros = require('./routes/semilleros');
 
@@ -28,7 +28,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/semilleros', semilleros);
 
 //Sincronización de la Base de Datos
