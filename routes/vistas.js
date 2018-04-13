@@ -18,4 +18,12 @@ router.get('/', function (req, res, next) {
     );
 });
 
+router.get('/listaSemilleros', function(req, res, next){
+  res.render('listaSemilleros');
+});
+
+router.get('/crearSemillero', function(req, res, next){
+  res.render('crearSemillero');
+});
+
 module.exports = router;

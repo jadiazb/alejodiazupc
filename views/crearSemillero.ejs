@@ -1,0 +1,35 @@
+<% include ./templates/header %>
+
+<form>
+    <div class="form-group">
+        <label for="nombreSemillero">Nombre: </label>
+        <input type="text" id="nombreSemillero" name="nombreSemillero" class="form-control" placeholder="Nombre del Semillero">
+    </div>
+    <div class="form-group">
+        <label for="descripcionSemillero">Descripción: </label>
+        <input type="text" id="descripcionSemillero" name="descripcionSemillero"class="form-control" placeholder="Descripción del Semillero">
+    </div>
+    <div class="form-group">
+        <label for="liderSemillero">Lider: </label>
+        <input type="text" id="liderSemillero" name="liderSemillero"class="form-control" placeholder="Lider del Semillero">
+    </div>
+    <button id="crearSemillero" type="button" class="btn btn-primary">Crear Semillero</button>
+</form>
+
+<% include ./templates/footer %>
+<% include ./templates/scripts %>
+
+<script>
+    $(document).ready(function(){
+        $("#crearSemillero").on("click",function(){
+            alert("dasdas");
+            $.ajax('semilleros/crearSemillero',{
+                type: "POST",
+                data: $('form').serialize(),
+                success: function(response){
+                    console.log(response);
+                }
+            });
+        });
+    });
+</script>

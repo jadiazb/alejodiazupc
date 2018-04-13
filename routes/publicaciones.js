@@ -13,11 +13,7 @@ router.get('/listaPublicacion', function(req, res) {
         (error) => {
             res.json(error);
         }
-
     );
-
-
-
 });
 
 router.post('/crearPublicacion', function(req, res) {
@@ -27,8 +23,6 @@ router.post('/crearPublicacion', function(req, res) {
         "imagenPublicacion": req.body.imagenPublicacion,
         "textoPublicacion": req.body.textoPublicacion,
         "idSemillero": req.body.idSemillero
-
-
     };
     console.log(infoPublicacion);
     models.Publicaciones.create(infoPublicacion).then(
@@ -50,9 +44,7 @@ router.get('/buscarPublicacion/:id', function(req, res) {
             where: {
                 "idPublicacion": idPublicacion
             }
-
         }
-
     ).then(
         (publicacion) => {
             res.json(publicacion);
@@ -62,8 +54,6 @@ router.get('/buscarPublicacion/:id', function(req, res) {
             res.json(error);
         }
     )
-
-
 });
 
 router.get('/eliminarPublicacion/:id', function(req, res) {
@@ -72,9 +62,7 @@ router.get('/eliminarPublicacion/:id', function(req, res) {
             where: {
                 "idPublicacion": idPublicacion
             }
-
         }
-
     ).then(
         (publicacion) => {
             publicacion.destroy().then(
@@ -88,8 +76,6 @@ router.get('/eliminarPublicacion/:id', function(req, res) {
             res.json(error);
         }
     )
-
-
 });
 
 router.post('/modificarPublicacion', function(req, res) {
@@ -106,9 +92,7 @@ router.post('/modificarPublicacion', function(req, res) {
             where: {
                 "idPublicacion": idPublicacion
             }
-
         }
-
     ).then(
         (publicacion) => {
             publicacion.updateAttributes(infoPublicacion).then(
@@ -122,6 +106,4 @@ router.post('/modificarPublicacion', function(req, res) {
             res.json(error);
         }
     )
-
-
 });

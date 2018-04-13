@@ -6,7 +6,7 @@ let models = require('../models/index')
 router.get('/listaSemilleros', function(req,res){
     models.Semilleros.findAll().then(
         (lista)=>{
-            res.json(lista);
+            res.json({"data": lista});
         }
     ).catch(
         (error)=>{
