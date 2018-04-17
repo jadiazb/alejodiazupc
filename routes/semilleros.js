@@ -75,7 +75,7 @@ router.get('/eliminarSemillero/:id', function(req, res){
 });
 
 router.post('/modificarSemillero', function(req, res){
-    let idSemillero = req.params.idSemillero;
+    let idSemillero = req.body.idSemillero;
     let infoSemillero = {
         "nombreSemillero": req.body.nombreSemillero,
         "descripcionSemillero": req.body.descripcionSemillero,

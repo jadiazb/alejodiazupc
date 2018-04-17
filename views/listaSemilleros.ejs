@@ -7,6 +7,7 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Lider</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -19,23 +20,119 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Lider</th>
+                <th></th>
             </tr>
         </tfoot>
     </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Semillero</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="idSemillero">Id Semillero: </label>
+                            <input type="text" id="idSemillero" name="idSemillero" class="form-control" placeholder="Id del Semillero" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombreSemillero">Nombre: </label>
+                            <input type="text" id="nombreSemillero" name="nombreSemillero" class="form-control" placeholder="Nombre del Semillero">
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcionSemillero">Descripción: </label>
+                            <input type="text" id="descripcionSemillero" name="descripcionSemillero"class="form-control" placeholder="Descripción del Semillero">
+                        </div>
+                        <div class="form-group">
+                            <label for="liderSemillero">Lider: </label>
+                            <input type="text" id="liderSemillero" name="liderSemillero"class="form-control" placeholder="Lider del Semillero">
+                        </div>
+                        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="modificarBTN" type="button" class="btn btn-primary">Modificar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>                  
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <% include ./templates/footer %>
         <% include ./templates/scripts %>
             <script>
                 $(document).ready(function () {
-                    $('#example').DataTable({
+                    var filaSeleccion = null;
+                    var tabla = $('#example').DataTable({
                         "ajax": "/semilleros/listaSemilleros",
-                        "columns": [
-                            { "data": "idSemillero" },
-                            { "data": "nombreSemillero" },
-                            { "data": "descripcionSemillero" },
-                            { "data": "liderSemillero" }
+                        "columns": [{
+                            "data": "idSemillero"
+                        },
+                        {
+                            "data": "nombreSemillero"
+                        },
+                        {
+                            "data": "descripcionSemillero"
+                        },
+                        {
+                            "data": "liderSemillero"
+                        },
+                        {
+                            "data": null,
+                            "className": "center",
+                            "defaultContent": '<a href="" id="editar">Editar</a> / <a href="" id="eliminar">Eliminar</a>'
+                        }
                         ]
                     });
+
+                    $("#example tbody").on('click', 'a#eliminar', function (e) {
+                        e.preventDefault();
+                        let fila = $(this).closest("tr");
+                        let informacion = tabla.row(fila).data();
+                        console.log(informacion);
+                        $.ajax(
+                            'semilleros/eliminarSemillero/' + informacion.idSemillero,
+                            {
+                                type: "GET",
+                                success: function () {
+                                    fila.remove();
+                                }
+                            }
+                        );
+                    });
+
+                    $("#example tbody").on('click', 'a#editar', function (e) {
+                        e.preventDefault();
+                        let fila = $(this).closest("tr");
+                        filaSeleccion = $(this).closest("tr");
+                        let informacion = tabla.row(fila).data();
+                        $("#idSemillero").val(informacion.idSemillero);
+                        $("#nombreSemillero").val(informacion.nombreSemillero);
+                        $("#descripcionSemillero").val(informacion.descripcionSemillero);
+                        $("#liderSemillero").val(informacion.liderSemillero);
+                        $("#exampleModal").modal("show");
+                    });
+
+                    $("#modificarBTN").on("click",function(){
+                        $.ajax(
+                            'semilleros/modificarSemillero',
+                            {
+                                type: "POST",
+                                data: $("form").serialize(),
+                                success: function (respuesta) {
+                                    console.log(respuesta);
+                                    filaSeleccion.data(respuesta).draw(false);
+                                    $("#exampleModal").modal("hide");
+                                }
+                            }
+                        );
+                    })
                 });
             </script>
