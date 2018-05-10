@@ -12,6 +12,12 @@ var index = require('./routes/vistas');
 
 //Vinculo las rutas
 var semilleros = require('./routes/semilleros');
+var publicaciones = require('./routes/publicaciones');
+
+//Passport
+var passport = requiere('passport');
+var session = require('express-session');
+
 
 var app = express();
 
@@ -27,13 +33,38 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Passport Configuration
+app.use(session(
+  {
+    secret: "Programacion Web Unipiloto",
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 10 * 60 * 1000
+    },
+    rolling: true
+  }
+));
+
+//Passport Definition
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 app.use('/', index);
 app.use('/semilleros', semilleros);
+app.use('/publicaciones', publicaciones);
+
+//Enviar a la configuración de la estrategia
+require('./config/passportStrategy')(passport, models.usuarios);
+
 
 //Sincronización de la Base de Datos
 models.sequelize.sync().then(
   function(){
-    console.log("Se conectó a la BD!!!");
+    console.log("Enhorabuena! Se conectó a la BD!!!");
   }
 ).catch(
   function(error){

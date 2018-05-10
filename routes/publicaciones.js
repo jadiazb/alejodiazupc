@@ -2,21 +2,25 @@ let express = require('express');
 let router = express.Router();
 let models = require('../models/index')
 
-router.get('/listaPublicacion', function(req, res) {
-
-    models.Publicaciones.findAll().then(
-        (lista) => {
-            res.json(lista);
+router.get('/listaPublicaciones', function (req, res, next) {
+    models.sequelize.query(' SELECT * FROM "Semilleros" INNER JOIN "Publicaciones" ON "Semilleros"."idSemillero" = "Publicaciones"."idSemillero"', 
+    {type: models.sequelize.QueryTypes.SELECT})
+        .then(lista => {
+            console.log(lista);
+            res.json({
+                "data": lista
+            });
         }
 
-    ).catch(
-        (error) => {
-            res.json(error);
-        }
-    );
+).catch(
+    (error) => {
+        console.log(error);
+        res.json(error);
+    }
+);
 });
 
-router.post('/crearPublicacion', function(req, res) {
+router.post('/crearPublicacion', function (req, res) {
     let infoPublicacion = {
         "fechaPublicacion": req.body.fechaPublicacion,
         "tituloPublicacion": req.body.tituloPublicacion,
@@ -38,14 +42,13 @@ router.post('/crearPublicacion', function(req, res) {
 
 module.exports = router;
 
-router.get('/buscarPublicacion/:id', function(req, res) {
+router.get('/buscarPublicacion/:id', function (req, res) {
     let idPublicacion = req.params.id;
     models.Publicaciones.find({
-            where: {
-                "idPublicacion": idPublicacion
-            }
+        where: {
+            "idPublicacion": idPublicacion
         }
-    ).then(
+    }).then(
         (publicacion) => {
             res.json(publicacion);
         }
@@ -56,18 +59,19 @@ router.get('/buscarPublicacion/:id', function(req, res) {
     )
 });
 
-router.get('/eliminarPublicacion/:id', function(req, res) {
+router.get('/eliminarPublicacion/:id', function (req, res) {
     let idPublicacion = req.params.id;
     models.Publicaciones.find({
-            where: {
-                "idPublicacion": idPublicacion
-            }
+        where: {
+            "idPublicacion": idPublicacion
         }
-    ).then(
+    }).then(
         (publicacion) => {
             publicacion.destroy().then(
                 () => {
-                    res.json({ "msg": "Se elimino" });
+                    res.json({
+                        "msg": "Se elimino"
+                    });
                 }
             );
         }
@@ -78,8 +82,8 @@ router.get('/eliminarPublicacion/:id', function(req, res) {
     )
 });
 
-router.post('/modificarPublicacion', function(req, res) {
-    let idPublicacion = req.body.idSemillero;
+router.post('/modificarPublicacion', function (req, res) {
+    let idPublicacion = req.body.idPublicacion;
     let infoPublicacion = {
         "fechaPublicacion": req.body.fechaPublicacion,
         "tituloPublicacion": req.body.tituloPublicacion,
@@ -89,14 +93,14 @@ router.post('/modificarPublicacion', function(req, res) {
 
     };
     models.Publicaciones.find({
-            where: {
-                "idPublicacion": idPublicacion
-            }
+        where: {
+            "idPublicacion": idPublicacion
         }
-    ).then(
+    }).then(
         (publicacion) => {
             publicacion.updateAttributes(infoPublicacion).then(
                 (publicacion) => {
+                    console.log(publicacion);
                     res.json(publicacion);
                 }
             );

@@ -1,0 +1,185 @@
+<% include ./templates/header %>
+
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id Semillero</th>
+                <th>Semillero</th>
+                <th>Id Publicacion</th>
+                <th>Titulo Publicacion</th>
+                <th>Imagen Publicacion</th>
+                <th>Texto Publicacion</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Id Semillero</th>
+                <th>Semillero</th>
+                <th>Id Publicacion</th>
+                <th>Titulo Publicacion</th>
+                <th>Imagen Publicacion</th>
+                <th>Texto Publicacion</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Publicacion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="idPublicacion">Id Publicacion: </label>
+                            <input type="text" id="idPublicacion" name="idPublicacion"class="form-control" placeholder="id Publicacion">
+                        </div>
+                        <div class="form-group">
+                            <label for="idSemillero">Semillero: </label>
+                            <select id="idSemillero" name="idSemillero" class="form-control"> </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaPublicacion">Fecha Publicacion: </label>
+                            <input type="date" id="fechaPublicacion" name="fechaPublicacion"class="form-control" placeholder="fecha Publicacion" value="new Date()">
+                        </div>
+                        <div class="form-group">
+                            <label for="tituloPublicacion">Titulo Publicacion: </label>
+                            <input type="text" id="tituloPublicacion" name="tituloPublicacion"class="form-control" placeholder="titulo Publicacion">
+                        </div>
+                        <div class="form-group">
+                            <label for="imagenPublicacion">Imagen Publicacion: </label>
+                            <input type="text" id="imagenPublicacion" name="imagenPublicacion"class="form-control" placeholder="imagen Publicacion">
+                        </div>
+                        <div class="form-group">
+                            <label for="textoPublicacion">Texto Publicacion: </label>
+                            <textarea type="text" id="textoPublicacion" name="textoPublicacion"class="form-control" placeholder="texto Publicacion"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="modificarBTN" type="button" class="btn btn-primary">Modificar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <% include ./templates/footer %>
+        <% include ./templates/scripts %>
+            <script>
+                $(document).ready(function () {
+                    var filaSeleccion = null;
+
+                            $.ajax('semilleros/listaSemilleros',{
+                type: "GET",
+                success: function(response){
+                    let semilleros = response.data;
+                    var semillerosHTML = $.map(semilleros, function(semillero, indice){
+                        return $("<option value=" +semillero.idSemillero+">"+semillero.nombreSemillero+"</option>")
+                    });
+                    $("#idSemillero").append(semillerosHTML);
+                }
+            });
+
+                    var tabla = $('#example').DataTable({
+                        "ajax": "publicaciones/listaPublicaciones",
+                        "columns": [{
+                            "data": "idSemillero"
+                        },
+                        {
+                            "data": "nombreSemillero"
+                        },
+                        {
+                            "data": "idPublicacion"
+                        },
+                        {
+                            "data": "tituloPublicacion"
+                        },
+                        {
+                            "data": "imagenPublicacion"
+                        },
+                        {
+                            "data": "textoPublicacion"
+                        },
+                        {
+                            "data": null,
+                            "className": "center",
+                            "defaultContent": '<a href="" id="editar">Editar</a> / <a href="" id="eliminar">Eliminar</a>'
+                        }
+                        ]
+                    });
+
+                    $("#example tbody").on('click', 'a#eliminar', function (e) {
+                        e.preventDefault();
+                        let fila = $(this).closest("tr");
+                        let informacion = tabla.row(fila).data();
+                        console.log(informacion);
+                        $.ajax(
+                            'publicaciones/eliminarPublicacion/' + informacion.idPublicacion,
+                            {
+                                type: "GET",
+                                success: function () {
+                                    fila.remove();
+                                }
+                            }
+                        );
+                    });
+
+                    $("#example tbody").on('click', 'a#editar', function (e) {
+                        e.preventDefault();
+                        let fila = $(this).closest("tr");
+                        filaSeleccion = $(this).closest("tr");
+                        let informacion = tabla.row(fila).data();
+                        $("#idSemillero").val(informacion.idSemillero);
+
+                        var now = new Date(informacion.fechaPublicacion);
+                        var day = ("0" + now.getDate()).slice(-2);
+                        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+                        $("#idPublicacion").val(informacion.idPublicacion);
+                        $("#fechaPublicacion").val(today);
+                        $("#tituloPublicacion").val(informacion.tituloPublicacion);
+                        $("#imagenPublicacion").val(informacion.imagenPublicacion);
+                        $("#textoPublicacion").val(informacion.textoPublicacion);
+                        $("#exampleModal").modal("show");
+                    });
+
+                    $("#modificarBTN").on("click",function(){
+                        $.ajax(
+                            'publicaciones/modificarPublicacion',
+                            {
+                                type: "POST",
+                                data: $("form").serialize(),
+                                success: function(respuesta) {
+
+                                    let informacion = tabla.row(filaSeleccion).data();
+                                    informacion.idSemillero = respuesta.idSemillero;
+                                    informacion.fechaPublicacion = respuesta.fechaPublicacion;
+                                    informacion.tituloPublicacion = respuesta.tituloPublicacion;
+                                    informacion.imagenPublicacion = respuesta.imagenPublicacion;
+                                    informacion.textoPublicacion = respuesta.textoPublicacion;
+                                    informacion.nombreSemillero = $("#idSemillero option:selected").text();
+                                    console.log(respuesta.textoPublicacion);
+                                    tabla.row(filaSeleccion).data(informacion).draw(false)
+                                    
+                                    
+                                    filaSeleccion.data(respuesta);
+                                    $("#exampleModal").modal("hide");
+                                }
+                            }
+                        );
+                    })
+                });
+            </script>

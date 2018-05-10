@@ -26,4 +26,12 @@ router.get('/crearSemillero', function(req, res, next){
   res.render('crearSemillero');
 });
 
+router.get('/crearPublicacion', function(req, res, next){
+  res.render('crearPublicacion');
+});
+
+router.get('/listaPublicaciones', function(req, res, next){
+  res.render('listaPublicaciones');
+});
+
 module.exports = router;
