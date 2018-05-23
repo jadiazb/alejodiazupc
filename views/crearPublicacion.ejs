@@ -6,20 +6,20 @@
                 <select id="idSemillero" name="idSemillero" class="form-control"> </select>
             </div>
             <div class="form-group">
-                <label for="fechaPublicacion">Fecha Publicacion: </label>
-                <input type="date" id="fechaPublicacion" name="fechaPublicacion" class="form-control" placeholder="fecha Publicacion" value="new Date()">
+                <label for="fechaPublicacion">Fecha Publicación: </label>
+                <input type="date" id="fechaPublicacion" name="fechaPublicacion" class="form-control" placeholder="Fecha Publicación" value="new Date()">
             </div>
             <div class="form-group">
-                <label for="tituloPublicacion">Titulo Publicacion: </label>
-                <input type="text" id="tituloPublicacion" name="tituloPublicacion" class="form-control" placeholder="titulo Publicacion">
+                <label for="tituloPublicacion">Titulo Publicación: </label>
+                <input type="text" id="tituloPublicacion" name="tituloPublicacion" class="form-control" placeholder="Titulo Publicación">
             </div>
             <div class="form-group">
-                <label for="imagenPublicacion">Imagen Publicacion: </label>
-                <input type="text" id="imagenPublicacion" name="imagenPublicacion" class="form-control" placeholder="imagen Publicacion">
+                <label for="imagenPublicacion">Imagen Publicación: </label>
+                <input type="text" id="imagenPublicacion" name="imagenPublicacion" class="form-control" placeholder="Imagen Publicación">
             </div>
             <div class="form-group">
-                <label for="textoPublicacion">Texto Publicacion: </label>
-                <textarea type="text" id="textoPublicacion" name="textoPublicacion" class="form-control" placeholder="texto Publicacion"></textarea>
+                <label for="textoPublicacion">Texto Publicación: </label>
+                <textarea type="text" id="textoPublicacion" name="textoPublicacion" class="form-control" placeholder="Texto Publicación"></textarea>
             </div>
             <button id="crearPublicacion" type="button" class="btn btn-primary">Crear Publicacion</button>
             <button type="button" class="btn btn-danger">
@@ -50,7 +50,7 @@
 
 
                     $("#crearPublicacion").on("click", function () {
-                        alert("dasdas");
+                        alert("Se creó la publicación exitosamente!");
                         $.ajax('publicaciones/crearPublicacion', {
                             type: "POST",
                             data: $('form').serialize(),

@@ -28,9 +28,8 @@
                 </tr>
             </tfoot>
         </table>
-
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -75,7 +74,6 @@
             </div>
         </div>
     </div>
-
 
     <% include ./templates/footer %>
         <% include ./templates/scripts %>
@@ -127,7 +125,7 @@
                         e.preventDefault();
                         let fila = $(this).closest("tr");
                         let informacion = tabla.row(fila).data();
-                        console.log(informacion);
+
                         $.ajax(
                             'publicaciones/eliminarPublicacion/' + informacion.idPublicacion, {
                                 type: "GET",
@@ -138,8 +136,9 @@
                         );
                     });
 
-                    $("#example tbody").on('click', 'a#editar', function (e) {
+                    $("#example tbody").on('click', '#editar', function (e) {
                         e.preventDefault();
+
                         let fila = $(this).closest("tr");
                         filaSeleccion = $(this).closest("tr");
                         let informacion = tabla.row(fila).data();
