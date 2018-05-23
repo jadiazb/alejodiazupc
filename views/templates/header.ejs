@@ -1,14 +1,101 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
+ <!-- <head>
+    <!-- Required meta tags 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 
     <title>Hello, world!</title>
-  </head>
+  </head> -->
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Semilleros</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/slider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../css/index.css">
+
+    <link rel="stylesheet" href="../css/navbar.css">
+    <script src="../js/navbar.js"></script>
+
+    <link rel="stylesheet" href="../css/carousel.css">
+    <script src="../js/carousel.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+
+
+    <!-- Barra de navegacion -->
+    <nav id="header" class="navbar navbar-fixed-top">
+      <div id="header-container" class="container navbar-container">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                  aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a id="brand" class="navbar-brand" href="../">Semilleros UPC</a>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                  <li>
+                      <a href="../">Inicio</a>
+                  </li>
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Semilleros
+                          <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a href="crearSemillero">Crear Semillero</a>
+                          </li>
+                          <li>
+                              <a href="listaSemilleros">Listar Semillero</a>
+                          </li>
+                          <li role="separator" class="divider"></li>
+                          <li>
+                              <a href="#">Más Información</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Publicaciones
+                          <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a href="crearPublicacion">Crear Publicación</a>
+                          </li>
+                          <li>
+                              <a href="listaPublicaciones">Listar Publicaciones</a>
+                          </li>
+                          <li role="separator" class="divider"></li>
+                          <li>
+                              <a href="#">Más Información</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </div>
+          <!-- /.nav-collapse -->
+      </div>
+      <!-- /.container -->
+  </nav>
+  <!-- /.navbar -->
+
+</head>
   <body>

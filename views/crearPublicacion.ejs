@@ -1,58 +1,63 @@
 <% include ./templates/header %>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="idSemillero">Semillero: </label>
+                <select id="idSemillero" name="idSemillero" class="form-control"> </select>
+            </div>
+            <div class="form-group">
+                <label for="fechaPublicacion">Fecha Publicacion: </label>
+                <input type="date" id="fechaPublicacion" name="fechaPublicacion" class="form-control" placeholder="fecha Publicacion" value="new Date()">
+            </div>
+            <div class="form-group">
+                <label for="tituloPublicacion">Titulo Publicacion: </label>
+                <input type="text" id="tituloPublicacion" name="tituloPublicacion" class="form-control" placeholder="titulo Publicacion">
+            </div>
+            <div class="form-group">
+                <label for="imagenPublicacion">Imagen Publicacion: </label>
+                <input type="text" id="imagenPublicacion" name="imagenPublicacion" class="form-control" placeholder="imagen Publicacion">
+            </div>
+            <div class="form-group">
+                <label for="textoPublicacion">Texto Publicacion: </label>
+                <textarea type="text" id="textoPublicacion" name="textoPublicacion" class="form-control" placeholder="texto Publicacion"></textarea>
+            </div>
+            <button id="crearPublicacion" type="button" class="btn btn-primary">Crear Publicacion</button>
+            <button type="button" class="btn btn-danger">
+                <a href="../" style="text-decoration: none; color: white">Cancelar </a>
+            </button>
+        </form>
+    </div>
 
-<form>
-    <div class="form-group">
-        <label for="idSemillero">Semillero: </label>
-        <select id="idSemillero" name="idSemillero" class="form-control"> </select>
-    </div>
-    <div class="form-group">
-        <label for="fechaPublicacion">Fecha Publicacion: </label>
-        <input type="date" id="fechaPublicacion" name="fechaPublicacion"class="form-control" placeholder="fecha Publicacion" value="new Date()">
-    </div>
-    <div class="form-group">
-        <label for="tituloPublicacion">Titulo Publicacion: </label>
-        <input type="text" id="tituloPublicacion" name="tituloPublicacion"class="form-control" placeholder="titulo Publicacion">
-    </div>
-    <div class="form-group">
-        <label for="imagenPublicacion">Imagen Publicacion: </label>
-        <input type="text" id="imagenPublicacion" name="imagenPublicacion"class="form-control" placeholder="imagen Publicacion">
-    </div>
-    <div class="form-group">
-        <label for="textoPublicacion">Texto Publicacion: </label>
-        <textarea type="text" id="textoPublicacion" name="textoPublicacion"class="form-control" placeholder="texto Publicacion"></textarea>
-    </div>
-    <button id="crearPublicacion" type="button" class="btn btn-primary">Crear Publicacion</button>
-</form>
+    <% include ./templates/footer %>
+        <% include ./templates/scripts %>
 
-<% include ./templates/footer %>
-<% include ./templates/scripts %>
-
-<script>
-    $(document).ready(function(){
-        var rightNow = new Date();
-        var res = rightNow.toISOString().slice(0,10).replace(/-/g, "-");
-        $("#fechaPublicacion").val(res);
-        $.ajax('semilleros/listaSemilleros',{
-                type: "GET",
-                success: function(response){
-                    let semilleros = response.data;
-                    var semillerosHTML = $.map(semilleros, function(semillero, indice){
-                        return $("<option value=" +semillero.idSemillero+">"+semillero.nombreSemillero+"</option>")
+            <script>
+                $(document).ready(function () {
+                    var rightNow = new Date();
+                    var res = rightNow.toISOString().slice(0, 10).replace(/-/g, "-");
+                    $("#fechaPublicacion").val(res);
+                    $.ajax('semilleros/listaSemilleros', {
+                        type: "GET",
+                        success: function (response) {
+                            let semilleros = response.data;
+                            var semillerosHTML = $.map(semilleros, function (semillero, indice) {
+                                return $("<option value=" + semillero.idSemillero + ">" +
+                                    semillero.nombreSemillero + "</option>")
+                            });
+                            $("#idSemillero").append(semillerosHTML);
+                        }
                     });
-                    $("#idSemillero").append(semillerosHTML);
-                }
-            });
 
 
-        $("#crearPublicacion").on("click",function(){
-            alert("dasdas");
-            $.ajax('publicaciones/crearPublicacion',{
-                type: "POST",
-                data: $('form').serialize(),
-                success: function(response){
-                    console.log(response);
-                }
-            });
-        });
-    });
-</script>
+                    $("#crearPublicacion").on("click", function () {
+                        alert("dasdas");
+                        $.ajax('publicaciones/crearPublicacion', {
+                            type: "POST",
+                            data: $('form').serialize(),
+                            success: function (response) {
+                                console.log(response);
+                            }
+                        });
+                    });
+                });
+            </script>

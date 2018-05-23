@@ -1,0 +1,23 @@
+@media screen and (max-width: 930px) {
+    .servicesN .cont-services .service {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .servicesN .cont-services .service {
+        width: 100%;
+        display: block;
+    }
+    .service .service-gift {
+        padding: 20px 0;
+    }
+    .service .service-gift img {
+        width: 80%;
+        filter: opacity(1);
+        border-radius: 3px;
+    }
+    .service .link-modal {
+        color: #39444c;
+    }
+}

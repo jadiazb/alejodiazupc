@@ -1,29 +1,174 @@
 <% include ./templates/header %>
 
-  <div class="row">
-    <% for(var i=0; i<info.length; i++){ %>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="https://placeimg.com/125/125/any" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">
-              <%= info[i].nombreSemillero %>
-            </h5>
-            <p class="card-text">
-              <%= info[i].descripcionSemillero %>
-            </p>
-            <p class="card-text">
-              <%= info[i].liderSemillero %>
-            </p>
-          </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <!-- CAROUSEL -->
+    <div id="first-slider">
+        <div id="carousel-example-generic" class="carousel slide carousel-fade">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <!-- Item 1 -->
+                <div class="item active slide1">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12 text-left">
+                                <h3 data-animation="animated bounceInDown">Noticias:</h3>
+                                <h4 data-animation="animated bounceInUp">Los estudiantes del semillero realizan una aplicación que aumenta la realidad! </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="item slide2">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12 text-left">
+                                <h3 data-animation="animated bounceInDown">Noticias:</h3>
+                                <h4 data-animation="animated bounceInUp">Otros estudiantes realizan una aplicación que aprende por si sola </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="item slide3">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12 text-left">
+                                <h3 data-animation="animated bounceInDown">Noticias:</h3>
+                                <h4 data-animation="animated bounceInUp">Abierta convocatoria para nuevos semilleros!</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="item slide4">
+                    <div class="row">
+                        <div class="container">
+                            <div class="col-md-12 text-left">
+                                <h3 data-animation="animated bounceInDown">Noticias</h3>
+                                <h4 data-animation="animated bounceInUp">Premio al mejor semillero UPC</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Item 4 -->
+
+            </div>
+            <!-- End Wrapper for slides-->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-      </div>
-      <% } %>
-  </div>
+    </div>
 
+    <br>
+    <br>
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="jumbotron">
+                <h1>Bienvenido!</h1>
+                <p>En esta página encontrarás información relacionada con los Semilleros de Investigación de la Universidad
+                    Piloto de Colombia y las diferentes Publicaciones que se han realizado.</p>
+            </div>
+        </div>
+    </div>
 
+    <!-- CARDS -->
 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card card-inverse card-info">
+                    <img class="card-img-top" src="img/1.jpeg">
+                    <div class="card-block">
+                        <figure class="profile profile-inline">
+                            <img src="img/1.jpeg" class="profile-avatar" alt="">
+                        </figure>
+                        <h4 class="card-title animated bounceInDown">Inteligencia Artificial</h4>
+                        <div class="card-text">
+                            Este es el Semillero de Inteligencia Artificial de la UPC.
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-info btn-sm">Ver Más</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card card-inverse card-info">
+                    <img class="card-img-top" src="img/2.jpeg">
+                    <div class="card-block">
+                        <figure class="profile profile-inline">
+                            <img src="../img/2.jpeg" class="profile-avatar" alt="">
+                        </figure>
+                        <h4 class="card-title animated bounceInDown">Smart Cities</h4>
+                        <div class="card-text">
+                            Este es el Semillero Smart Cities de la UPC.
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-info btn-sm">Ver Más</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card card-inverse card-info">
+                    <img class="card-img-top" src="img/3.jpeg">
+                    <div class="card-block">
+                        <figure class="profile profile-inline">
+                            <img src="img/3.jpeg" class="profile-avatar" alt="">
+                        </figure>
+                        <h4 class="card-title animated bounceInDown">Internet de las Cosas</h4>
+                        <div class="card-text">
+                                Este es el Semillero Internet de las Cosas de la UPC.
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-info btn-sm">Ver Más</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card card-inverse card-info">
+                    <img class="card-img-top" src="img/4.jpeg">
+                    <div class="card-block">
+                        <figure class="profile profile-inline">
+                            <img src="img/4.jpeg" class="profile-avatar" alt="">
+                        </figure>
+                        <h4 class="card-title animated bounceInDown">Realidad Aumentada</h4>
+                        <div class="card-text">
+                                Este es el Semillero Realidad Aumentada de la UPC.
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-info btn-sm">Ver Más</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="container">
+        <footer>
+            <p>© Javier Alejandro Díaz - Santiago Galeano - Daniel Peña 2018</p>
+        </footer>
 
-  <% include ./templates/footer %>
-    <% include ./templates/scripts %>
+    </div>
+
+</body>
+
+</html>
