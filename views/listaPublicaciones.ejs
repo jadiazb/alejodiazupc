@@ -29,14 +29,14 @@
             </tfoot>
         </table>
         <!-- Modal -->
-        <div class="modal " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modificar Publicacion</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
+                        <h4 class="modal-title custom_align" id="exampleModal">Modificar Semillero</h4>
                     </div>
                     <div class="modal-body">
                         <form>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="modal-footer">
                         <button id="modificarBTN" type="button" class="btn btn-primary">Modificar</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -116,12 +116,14 @@
                             {
                                 "data": null,
                                 "className": "center",
-                                "defaultContent": '<a href="" id="editar">Editar</a> / <a href="" id="eliminar">Eliminar</a>'
+                                //"defaultContent": '<a href="" id="editar">Editar</a> / <a href="" id="eliminar">Eliminar</a>'
+                                "defaultContent": '<div class="modal-container"><button id="editar" class="btn btn-primary btn-xs" data-title="Editar" ><span class="glyphicon glyphicon-pencil"></span> </button> <button id="eliminar" class="btn btn-danger btn-xs" data-title="Eliminar"  ><span class="glyphicon glyphicon-trash"></span></button></div>'
+
                             }
                         ]
                     });
 
-                    $("#example tbody").on('click', 'a#eliminar', function (e) {
+                    $("#example tbody").on('click', '#eliminar', function (e) {
                         e.preventDefault();
                         let fila = $(this).closest("tr");
                         let informacion = tabla.row(fila).data();
@@ -173,8 +175,6 @@
                                         "#idSemillero option:selected").text();
                                     console.log(respuesta.textoPublicacion);
                                     tabla.row(filaSeleccion).data(informacion).draw(false)
-
-
                                     filaSeleccion.data(respuesta);
                                     $("#exampleModal").modal("hide");
                                 }

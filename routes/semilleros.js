@@ -65,11 +65,15 @@ router.get('/eliminarSemillero/:id', function(req, res){
                 ()=>{
                     res.json({'msg':'Se eliminó el registro'});
                 }
+            ).catch(
+                (error)=>{
+                    res.status(400).json(error);
+                }
             );
         }
     ).catch(
         (error)=>{
-            res.json(error);
+            res.status(400).json(error);
         }
     );
 });

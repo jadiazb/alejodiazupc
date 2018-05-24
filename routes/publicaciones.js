@@ -70,14 +70,14 @@ router.get('/eliminarPublicacion/:id', function (req, res) {
             publicacion.destroy().then(
                 () => {
                     res.json({
-                        "msg": "Se elimino"
+                        "msg": "Se elimino la publicación"
                     });
                 }
             );
         }
     ).catch(
         (error) => {
-            res.json(error);
+            res.status(400).json(error);
         }
     )
 });
